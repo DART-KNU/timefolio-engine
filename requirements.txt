@@ -2,6 +2,9 @@
 requests>=2.31.0
 python-dotenv>=1.0.1
 
+# --- 실시간 SignalR WebSocket ---
+signalrcore>=0.9.5
+
 # --- 데이터 수집 및 분석 (MVO 엔진용) ---
 pykrx>=1.0.48
 pandas>=2.0.0

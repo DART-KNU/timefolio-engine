@@ -10,6 +10,7 @@ Responsibilities:
 
 import logging
 import requests
+from requests import auth
 
 logger = logging.getLogger(__name__)
 
@@ -70,6 +71,11 @@ class TimefolioAPIClient:
 
         logger.error("Login failed (HTTP %s): %s", res.status_code, res.text)
         return False
+    
+    def get_token(self) -> str:
+        """현재 세션의 Bearer 토큰 반환"""
+        auth = self.session.headers.get("Authorization", "")
+        return auth.replace("Bearer ", "")
 
     # ------------------------------------------------------------------
     # Raw request helpers
