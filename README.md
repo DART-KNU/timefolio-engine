@@ -12,9 +12,12 @@
 ```
 timefolio-engine/
 ├── timefolio/               # 라이브러리 본체
-│   ├── __init__.py          # TimefolioAPIClient, TimefolioTrader export
+│   ├── __init__.py          # TimefolioAPIClient, TimefolioTrader, TimefolioCollector export
 │   ├── api_client.py        # 인증·세션·HTTP 래퍼
-│   └── trader.py            # 주문·취소·잔고 조회
+│   ├── trader.py            # 주문·취소·잔고 조회
+│   └── collector.py         # 리더보드·포트폴리오 수집
+├── execution/               # 실행 스크립트
+│   └── sell_all.py          # 보유 주식 전량 매도
 ├── examples/
 │   └── quickstart.ipynb     # 사용 예제 노트북
 ├── requirements.txt
@@ -79,6 +82,25 @@ trader.get_balance()
 ```
 
 더 자세한 예제는 **`examples/quickstart.ipynb`** 를 참고하세요.
+
+---
+
+## 실행 스크립트
+
+### 전량 매도 (`execution/sell_all.py`)
+
+보유 종목을 한 번에 전량 매도하는 스크립트입니다.
+
+```bash
+python execution/sell_all.py
+```
+
+동작 순서:
+1. `.env`에서 계정 정보 로드 → 로그인
+2. SignalR 실시간 연결로 현재 포지션/잔고 조회
+3. 미채결 주문 종목 제외 후 나머지 전량 EXIT 주문 실행
+
+> 배치 단위(5건)로 주문하며, 503 에러 시 자동 재시도합니다.
 
 ---
 
