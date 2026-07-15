@@ -72,10 +72,10 @@ api.login()
 trader = TimefolioTrader(api_client=api, pf_id=18762)
 
 # 삼성전자 5% 즉시 매수
-trader.order(prod_id="A005930", weight=0.05, ls="L")
+trader.order(prod_id="A005930", weight=5, ls="L")
 
 # 현대차 10% TWAP 매수 (09:00~12:20)
-trader.order(prod_id="A005380", weight=0.10, ls="L", hm0="09:00", hm1="12:20")
+trader.order(prod_id="A005380", weight=10, ls="L", hm0="09:00", hm1="12:20")
 
 # 잔고 조회
 trader.get_balance()
@@ -109,7 +109,7 @@ python execution/sell_all.py
 | 파라미터 | 설명 |
 |---|---|
 | `prod_id` | 종목코드 (`A` 접두 필수, 예: `A005930`) |
-| `weight` | 포트폴리오 비중 (`0.05` = 5%) |
+| `weight` | 포트폴리오 비중 (`5` = 5%) |
 | `ls` | `"L"` 매수 / `"S"` 매도 |
 | `limit_idx` | 호가 공격성 1–10 (기본 5) |
 | `limit_prc` | 지정가 — `None` 시 알고리즘 가격 |
